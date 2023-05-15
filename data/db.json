@@ -1,0 +1,35 @@
+{
+  "articles": [
+    {
+      "title": "Shatter Me Series",
+      "content": "dystopian fantasy",
+      "price":125.5,
+      "id": 1
+    },
+    {
+      "title": "The Love Hypothesis",
+      "content": "Romcom  Staff",
+      "price":150.25,
+      "id": 2
+    },
+    {
+      "title": "Verifty",
+      "content": "Thriller, Suspence",
+      "price":110.15,
+      "id": 3
+    },
+    {
+      "title": "Under The Moonlights",
+      "content": "History staff",
+      "price":200.05,
+      "id": 5
+    },
+    {
+      "title": "Sweet Home",
+      "content": "Horror",
+      "price":155,
+      "id": 6
+    }
+  ],
+  "categories": []
+}

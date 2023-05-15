@@ -1,0 +1,12 @@
+<div class="card my-2">
+    <img class="card-img-top" [src]="myUser.avatar_url" alt="Title">
+    <div class="card-body">
+        <h4 class="card-title">{{ myUser.login }}</h4>
+        <div class="card-text">
+            <a [href]="myUser.html_url"  class=" btn btn-info">Read more..</a>
+            <button class="btn btn-danger ms-2" (click)="removeUser(myUser)">Delete</button>
+            <button class="btn btn-warning my-2" (click)="tester(myUser)">Test</button>
+            <a [routerLink]="['/github',myUser.login]">CheckOut more</a>
+        </div>
+    </div>
+</div> 

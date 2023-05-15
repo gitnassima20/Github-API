@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto" >
+            <form [formGroup]="articleForm" (ngSubmit)="saveArticle()" >
+                <div class="form-group">
+                    <label class="form-control-label" for="title">Title</label>
+                    <input formControlName="title" type="text" class="form-control" id="title" name="title" />
+                    <div class="alert alert-danger" *ngIf="articleForm.get('title')?.invalid && (articleForm.get('title')?.dirty || articleForm.get('title')?.touched)">
+                        <div *ngIf="articleForm.get('title')?.errors?.['required']">Required field</div>
+                        <div *ngIf="articleForm.get('title')?.errors?.['minlength']">Min carcters is 4</div>
+                        <div *ngIf="articleForm.get('title')?.errors?.['maxlength']">Max caracters is 10</div>
+                        <div *ngIf="articleForm.get('title')?.errors?.['pattern']">Only alphabets required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="content">Content</label>
+                    <input formControlName="content" type="text" class="form-control" id="title" name="content" />
+                </div>
+                <div class="d-grid">
+                    <button [disabled]="articleForm.invalid"  type="submit" class="my-2 btn btn-success" *ngIf="!editable"><i class="fa fa-paper-plane" aria-hidden="true"></i>Submit</button>
+                    <button (click)="updateArticle()" class="my-2 btn btn-danger" *ngIf="editable"><i class="fa fa-paper-plane" aria-hidden="true"></i>Submit</button>
+                </div> 
+            </form>
+            <!--<form #myForm="ngForm" (ngSubmit)="saveArticle(myForm)">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="title"  class="col-sm-2 col-form-label">Title</label>
+                        <input #myTitle="ngModel" ngModel (keyup)="log(myTitle)"  type="text" name="title" class="form-control" placeholder="Enter title" required minlength="4" maxlength="10">
+                        <div class="alert alert-danger" *ngIf="myTitle.errors && (myTitle.touched || myTitle.dirty)">
+                            <div *ngIf="myTitle.errors?.['required']">Required field</div>
+                            <div *ngIf="myTitle.errors?.['minlength']" >this field must have at least 4 charcters</div>
+                            <div *ngIf="myTitle.errors?.['maxlength']">the max of caracters is 10</div>
+                        </div>
+                    </div>
+                    <div class="form-group my-2">
+                        <label for="Content" class="col-sm-2 col-form-label">Content</label>
+                        <textarea #myContent="ngModel" ngModel  type="text" name="content" class="form-control" rows="3" pattern=[0-9a-zA-Z]* required minlength="10" maxlength="15" ></textarea>
+                        <div class="alert alert-danger" *ngIf="myContent.errors && (myContent.touched || myContent.dirty)">
+                            <div *ngIf="myContent.errors?.['required']">Required field</div>
+                            <div *ngIf="myContent.errors?.['minlength']" >this field must have at least {{ myContent.errors?.['minlength']['actualLength']}} / {{myContent.errors?.['minlength']['requiredLength']}} charcters</div>
+                            <div *ngIf="myContent.errors?.['maxlength']">the max of caracters is 15</div>
+                            <div *ngIf="myContent.errors?.['pattern']" >Only alphabets required</div>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button  [disabled]="!myForm.valid" type="submit" class="my-2 btn btn-success" *ngIf="!editable"><i class="fa fa-paper-plane" aria-hidden="true"></i>Submit</button>
+                        <button (click)="updateArticle()" class="my-2 btn btn-danger" *ngIf="editable"><i class="fa fa-paper-plane" aria-hidden="true"></i>Submit</button>
+                    </div> 
+                </fieldset>
+            </form>-->
+        </div>
+    </div>
+    <div class="row my-2">
+        <div class="col-md-6">
+            <h1>List of articles</h1>
+        </div>
+        <div class="col-md-6 my-4" align="right">
+            <button class="btn btn-primary" (click)="changeMode(true)"><i class="fa fa-list" aria-hidden="true"></i></button>
+            <button class="btn btn-secondary" (click)="changeMode(false)"><i class="fa fa-th" aria-hidden="true"></i></button>
+        </div>
+    </div>
+        <div class="row" *ngIf="list" >
+            <div class="col-12" >
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                          <th scope="col">Article Id</th>
+                          <th scope="col">Title</th>
+                          <th scope="col">Content</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="table-dark" *ngFor="let article of articles">
+                          <td ><a [routerLink]="['/blog',article.id]">{{ article.id }}</a></td>
+                          <td>{{ article.title | uppercase }}</td>
+                          <td>{{ article.content }}</td>
+                          <td  class="text-center">
+                            <button type="button" class="btn btn-warning mx-2" (click)="editArticle(article)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                            <button type="button" class="btn btn-danger" (click)="destroyArticle(article.id)"><i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+    
+                </table>
+                
+            </div>
+        </div>
+    
+    
+</div>
+
+    <div class="row" *ngIf="!list" >
+        <div class="col-md-4 my-2" *ngFor="let article of articles">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">{{ article.title | uppercase}}</h4>
+                    <p style="height: 30px"class="card-text ">{{ article.content | titlecase }}</p>
+                    <p style="height: 30px"class="card-text "> {{ article.price | currency:'EUR'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

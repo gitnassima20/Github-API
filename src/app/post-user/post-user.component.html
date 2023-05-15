@@ -1,0 +1,59 @@
+<section class="h-100 gradient-custom-2">
+    <div class="container-fluid">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+          <div class="card">
+            <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
+              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+                <img [src]="user.avatar_url"
+                  alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                  style="width: 150px; z-index: 1">
+              </div>
+              <div class="ms-3" style="margin-top: 130px;">
+                <h5><i class="fa fa-github-square" aria-hidden="true"></i>{{ user.login}}</h5>
+                <p>{{ user.location}}</p>
+              </div>
+            </div>
+            <div class="p-4 text-black" style="background-color: #f8f9fa;">
+              <div class="d-flex justify-content-end text-center py-1">
+                <div>
+                  <p class="mb-1 h5">{{ user.public_repos}}</p>
+                  <p class="small text-muted mb-0">Public Repos</p>
+                </div>
+                <div class="px-3">
+                  <p class="mb-1 h5">{{ user.followers}}</p>
+                  <p class="small text-muted mb-0">Followers</p>
+                </div>
+                <div>
+                  <p class="mb-1 h5">{{ user.following}}</p>
+                  <p class="small text-muted mb-0">Following</p>
+                </div>
+              </div>
+            </div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" data-bs-toggle="tab" aria-selected="false" href="#home" role="tab" tabindex="-1"><i class="fa fa-code-fork mx-2" aria-hidden="true"></i><b>Repositories</b></a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#profile" aria-selected="true" role="tab"><i class="fa fa-user-circle-o mx-2" aria-hidden="true"></i><b>Followers</b></a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade" id="home" role="tabpanel">
+                    <div *ngFor="let repo of repos">
+                        <p>{{repo.name}}</p>
+                      </div>
+                </div>
+                <div class="tab-pane fade active show" id="profile" role="tabpanel">
+                    <div *ngFor="let follower of followers">
+                        <p>{{follower.login}}</p>
+                    </div>
+                </div>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
